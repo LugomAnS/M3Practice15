@@ -35,7 +35,6 @@
             Console.WriteLine($"<--Завершен поток №: {Thread.CurrentThread.ManagedThreadId}");
         }
 
-
         public void WritePlusWithLock()
         {
             Console.WriteLine($"**>Запущен поток №: {Thread.CurrentThread.ManagedThreadId}");

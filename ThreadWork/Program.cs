@@ -11,6 +11,7 @@ namespace ThreadWork
             ThreadWorkClass testObject = new ThreadWorkClass();
 
             Thread[] threads = new Thread[2];
+
             threads[0] = new Thread(testObject.WritePlus);
             threads[1] = new Thread(testObject.WriteMinus);
             
