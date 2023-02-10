@@ -2,6 +2,7 @@
 {
     public class ThreadWorkClass
     {
+        // разделяемый ресурс
         private static object o = new object();
 
         public ThreadWorkClass()
@@ -15,10 +16,10 @@
             for (int i = 0; i < 40; i++)
             {
                 Console.Write("+");
-                Thread.Sleep(25);
+                Thread.Sleep(50);
             }
 
-            Console.WriteLine($"<--Завершен поток поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"<--Завершен поток №: {Thread.CurrentThread.ManagedThreadId}");
         }
 
         public void WriteMinus()
@@ -28,49 +29,49 @@
             for (int i = 0; i < 30; i++)
             {
                 Console.Write("-");
-                Thread.Sleep(50);
+                Thread.Sleep(80);
             }
 
-            Console.WriteLine($"<--Завершен поток поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"<--Завершен поток №: {Thread.CurrentThread.ManagedThreadId}");
         }
 
 
         public void WritePlusWithLock()
         {
-            Console.WriteLine($"-->Запущен поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"**>Запущен поток №: {Thread.CurrentThread.ManagedThreadId}");
 
             lock(o)
             {
-                Console.WriteLine("---Работа с критической секцией, блокировка доступа");
+                Console.WriteLine($"***Работа с критической секцией, блокировка доступа, поток - {Thread.CurrentThread.ManagedThreadId}");
+                Thread.Sleep(20);
                 for (int i = 0; i < 40; i++)
                 {
                     Console.Write("+");
-                    Thread.Sleep(25);
+                    Thread.Sleep(50);
                 }
-
+                Console.WriteLine($"\n***Блокировка снята, поток - {Thread.CurrentThread.ManagedThreadId}");
             }
-            Console.WriteLine("---Блокировка снята");
 
-            Console.WriteLine($"<--Завершен поток поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"<**Завершен поток №: {Thread.CurrentThread.ManagedThreadId}");
         }
 
         public void WriteMinusWithLock()
         {
-            Console.WriteLine($"-->Запущен поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"**>Запущен поток №: {Thread.CurrentThread.ManagedThreadId}");
 
             lock (o)
             {
-                Console.WriteLine("---Работа с критической секцией, блокировка доступа");
+                Thread.Sleep(20);
+                Console.WriteLine($"***Работа с критической секцией, блокировка доступа, поток - {Thread.CurrentThread.ManagedThreadId}");
                 for (int i = 0; i < 30; i++)
                 {
                     Console.Write("-");
-                    Thread.Sleep(50);
+                    Thread.Sleep(80);
                 }
-
+                Console.WriteLine($"\n***Блокировка снята, поток - {Thread.CurrentThread.ManagedThreadId}");
             }
-            Console.WriteLine("---Блокировка снята");
 
-            Console.WriteLine($"<--Завершен поток поток №: {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"<**Завершен поток №: {Thread.CurrentThread.ManagedThreadId}");
         }
 
     }
